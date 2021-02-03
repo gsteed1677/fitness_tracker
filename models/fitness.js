@@ -28,12 +28,13 @@ const FitnessSchema = new Schema({
 
   duration: {
     type: Number,
-    required: "How many minutes did you work out?"
+    required: "How many minutes did you work out?",
+    default: 0
   },
 
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   },
 
   

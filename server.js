@@ -18,12 +18,12 @@ app.use(express.json());
 //use static files
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitnesstrack", {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness", {useNewUrlParser: true});
 
 
 //routes
-require('./routes/api-routes')(app)
-require('./routes/html-routes')(app)
+app.use(require('./routes/api-routes'))
+app.use(require('./routes/html-routes'))
 
 
 app.listen(PORT, () => {
