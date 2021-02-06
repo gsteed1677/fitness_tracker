@@ -41,7 +41,7 @@ const FitnessSchema = new Schema({
 
   }],
 
-  date: {
+  day: {
     type: Date,
     default: Date.now()
   },
@@ -49,6 +49,12 @@ const FitnessSchema = new Schema({
   
 });
 //need one more thing here to get duration working
+Fitness.virtual("totalDuration").get(function() {
+  return this.exercises.reduce(
+    (total, exercise) => {
+    return total + exercise.duration
+  }, 0)
+})
 const Fitness = mongoose.model("Fitness", FitnessSchema);
 
 module.exports = Fitness;
