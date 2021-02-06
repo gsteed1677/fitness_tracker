@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const FitnessSchema = new Schema({
-
+const FitnessSchema = new Schema(
+  {
   exercises: [
   {
   type: {
@@ -40,16 +40,20 @@ const FitnessSchema = new Schema({
   }
 
   }],
-
   day: {
     type: Date,
     default: Date.now()
   },
+},
+{
+  toJSON: {
+    virtuals: true
+  }
+}
 
-  
-});
+);
 //need one more thing here to get duration working
-Fitness.virtual("totalDuration").get(function() {
+FitnessSchema.virtual("totalDuration").get(function() {
   return this.exercises.reduce(
     (total, exercise) => {
     return total + exercise.duration

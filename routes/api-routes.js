@@ -27,27 +27,21 @@ app.put("/api/workouts/:id", ({ body, params}, res) => {
 });
 
 app.get("/api/workouts", (req, res) => {
-    Fitness.find({}, (err, fitnessDB) => {
-        if(err){
-            console.log(err);
-        } else {
-            res.json(fitnessDB)
-            console.log(fitnessDB)
-        }
-    });
+    Fitness.find()
+    .then((fitnessDB) => {
+        console.log(fitnessDB)
+        res.json(fitnessDB)
+    })
+    // Fitness.find({}, (err, fitnessDB) => {
+    //     if(err){
+    //         console.log(err);
+    //     } else {
+    //         console.log(fitnessDB)
+    //         res.json(fitnessDB)
+    //     }
+    // });
 });
 
-app.get("/api/workouts", (req, res) => {
-    Fitness.aggregate([
-        {
-            $addFields: {
-                totalDuration: {
-                    $sum: "$excerises.duration"
-                },
-            },
-        },
-    ]);
-});
 
 
 
