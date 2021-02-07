@@ -42,7 +42,15 @@ app.get("/api/workouts", (req, res) => {
     // });
 });
 
-
+app.get("/api/workouts/range", ({ query }, res) => {
+  Fitness.find({ day: { $gte: query.start, $lte: query.end } })
+    .then(fitnessDB => {
+      res.json(fitnessDB);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 
 app.delete("/api/workouts", ({ body }, res) => {
