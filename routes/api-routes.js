@@ -43,7 +43,7 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.get("/api/workouts/range", (req, res) => {
-        Fitness.find({})
+        Fitness.find()
         .then(fitnessDB => {
             res.json(fitnessDB);
         })
